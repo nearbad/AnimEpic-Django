@@ -1,0 +1,27 @@
+{% extends "layout/basic.html" %}
+
+{% load bootstrap4 %}
+
+{% block title %}{{ post.name }}{% endblock %}
+{% block content %}
+<div class="bg-success-subtle">
+    <div class="container mx-5 bg-subtle">
+        <div class="row text-md-center">
+            <h1 class="display-3">{{post.name}}</h1>
+        </div>
+        <div class="row">
+            <div class="col-6 text-md-end">
+                {% if post.photo %}
+                <p><img class="img-article-left" src="{{post.photo.url}}"></p>
+                {% endif %}
+            </div>
+            <div class="col-6">
+                <p class="lead">
+                    {{post.content}}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

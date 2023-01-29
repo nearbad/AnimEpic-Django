@@ -1,0 +1,35 @@
+{% extends "layout/basic.html" %}
+
+{% load bootstrap4 %}
+
+{% block title %}Character List{% endblock %}
+{% block content %}
+
+
+<ul class="list-unstyled m-0">
+    <div class="row">
+        {% for char in char_list %}
+        <div class="col-4">
+            <div class="card m-3 text-bg-dark" style="max-width: 450px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <a href="{% url 'main:PostView' char.slug %}">
+                            <img src="{{ char.photo.url }}" class="img-fluid rounded-start" alt="...">
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ char.name }}</h5>
+                            <p class="card-text">{{ char.content|linebreaks|truncatewords:13 }}</p>
+                            <a href="{% url 'main:PostView' char.slug %}" class="btn btn-outline-secondary">Read</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</ul>
+
+
+{% endblock %}

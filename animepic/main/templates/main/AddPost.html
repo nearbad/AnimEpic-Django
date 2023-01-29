@@ -1,0 +1,13 @@
+{% extends "layout/basic.html" %}
+
+{% load bootstrap4 %}
+
+{% block title %}New Character{% endblock %}
+{% block content %}
+<h2>Adding a Character</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+    {% buttons submit='Add' %}{% endbuttons %}
+</form>
+{% endblock %}
