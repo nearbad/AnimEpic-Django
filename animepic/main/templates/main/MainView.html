@@ -1,15 +1,17 @@
 {% extends "layout/basic.html" %}
 
 {% load bootstrap4 %}
+{% load static %}
 
 {% block title %}Character List{% endblock %}
+
 {% block content %}
 
-
+{% if char_list %}
 <ul class="list-unstyled m-0">
     <div class="row">
         {% for char in char_list %}
-        <div class="col-4">
+        <div class="col-lg-4 col-md-6">
             <div class="card m-3 text-bg-dark" style="max-width: 450px;">
                 <div class="row g-0">
                     <div class="col-md-4">
@@ -20,7 +22,7 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">{{ char.name }}</h5>
-                            <p class="card-text">{{ char.content|linebreaks|truncatewords:13 }}</p>
+                            <p class="card-text">{{ char.content|linebreaks|truncatechars:85 }}</p>
                             <a href="{% url 'main:PostView' char.slug %}" class="btn btn-outline-secondary">Read</a>
                         </div>
                     </div>
@@ -30,6 +32,15 @@
         {% endfor %}
     </div>
 </ul>
-
+{% else %}
+<div class="row-md m-5">
+    <div class="display5 text-center">
+        Sorry... didn't find anyone matching your request
+    </div>
+    <p class="text-center">
+        <a href="{% url 'main:AddPost' %}" class="text-info">You can add this character!</a>
+    </p>
+</div>
+{% endif %}
 
 {% endblock %}

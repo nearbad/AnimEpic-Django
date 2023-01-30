@@ -1,4 +1,5 @@
 {% load bootstrap4 %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 
@@ -13,9 +14,47 @@
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="shortcut icon" type="image/png" href="{% static 'main/images/favicon.ico' %}"/>
+    {% block style %}
+    <style>
+        body
+        {
+            background: url({% static 'main/images/backgroundddd.jpg' %}) no-repeat center center fixed;
+            -webkit-background-size: 100% 100%;
+            -moz-background-size: 100% 100%;
+            -o-background-size: 100% 100%;
+            background-size:  100% 100%
+        }
+
+        .pagination > li > a
+        {
+            background-color: #8b898c;
+            color: #4f4e52;
+            border: solid 1px #8b898c !Important;
+        }
+
+        .pagination > .active > a
+        {
+            color: white;
+            background-color: #39373b !Important;
+            border: solid 1px #8b898c;
+        }
+
+        .pagination > li > a:hover
+        {
+            color: #7569bf;
+            background-color: #39373b !Important;
+            border: solid 1px #39373b;
+        }
+
+
+
+    </style>
+    {% endblock %}
+
 </head>
 
-<body class="d-flex flex-column h-100 bg-secondary">
+<body class="d-flex flex-column h-100">
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -27,6 +66,21 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% if not request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main:Login' %}">Log in</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Profile - {{user.username}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'main:Logout' %}">Log out</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'main:MainView' %}">All characters</a>
                     </li>
@@ -49,7 +103,8 @@
                     </li>
                 </ul>
                 <form class="d-flex" role="search" action="{% url 'main:Search' %}" method="get">
-                    <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <input name="q" class="form-control me-2" type="search" placeholder="Search"
+                           aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search...</button>
                 </form>
             </div>
@@ -58,16 +113,55 @@
 </header>
 <main>
     {% bootstrap_messages %}
-    {% block content %}
-    {% endblock %}
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    {% if page_obj.has_other_pages %}
+    <nav class="md">
+        <ul class="pagination justify-content-center">
+
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link text-muted" href="#" style="background-color: #8b898c;
+                border: solid 1px #8b898c !Important;">Previous</a>
+            </li>
+            {% endif %}
+
+            {% for p in paginator.page_range %}
+            {% if page_obj.number == p %}
+            <li class="page-item active"><a class="page-link" href="?page={{ p }}">{{p}}</a></li>
+            {% elif p >= page_obj.number|add:-3 and p <= page_obj.number|add:3 %}
+            <li class="page-item "><a class="page-link" href="?page={{ p }}">{{p}}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link text-muted" href="#" style="background-color: #8b898c;
+                border: solid 1px #8b898c !Important;">Next</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
 </main>
 
 
 <footer class="footer mt-auto py-3 bg-dark text-center text-white">
     <!-- Grid container -->
-    <div class="container p-4 pb-0">
+    <div class="container p-1 pb-0">
         <!-- Section: Social media -->
-        <section class="mb-4">
+        <section class="mb-3">
             <!-- Facebook -->
             <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
                     class="bi bi-facebook"></i></a>
@@ -93,9 +187,9 @@
     <!-- Grid container -->
 
     <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
         © 2023 Copyright:
-        <a class="text-white" href="#">nearbad.com</a>
+        <a class="text-white" href="#">animepic.com</a>
     </div>
     <!-- Copyright -->
 

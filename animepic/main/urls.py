@@ -11,4 +11,8 @@ urlpatterns = [
     path('character/new/add/', AddPost.as_view(), name='AddPost'),
     path('contact/', Contact.as_view(), name='Contact'),
     path('search/', SearchView.as_view(), name='Search'),
+    path('accounts/register/', RegisterUser.as_view(), name='Registrate'),
+    path('accounts/login/', LoginUser.as_view(), name='Login'),
+    path('accounts/logout/', logout_user, name='Logout')
 ]
+

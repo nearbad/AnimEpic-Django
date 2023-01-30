@@ -10,7 +10,7 @@ class Character(models.Model):
     photo = models.ImageField(upload_to="photos/%Y/%m/%d")
     time_create = models.DateTimeField(auto_now_add=True)
     time_upload = models.DateTimeField(auto_now=True)
-    is_published = models.BooleanField(default=True, verbose_name='is published?')
+    is_published = models.BooleanField(default=False, verbose_name='is published?')
     cat = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Category')
 
     def __str__(self):
@@ -22,7 +22,7 @@ class Character(models.Model):
     class Meta:
         verbose_name = 'Anime Character'
         verbose_name_plural = 'Anime Characters'
-        ordering = ['time_create', 'name']
+        ordering = ['-time_create', 'name']
 
 
 class Category(models.Model):

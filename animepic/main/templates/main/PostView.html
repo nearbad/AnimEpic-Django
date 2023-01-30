@@ -1,27 +1,41 @@
 {% extends "layout/basic.html" %}
 
 {% load bootstrap4 %}
+{% load static %}
 
-{% block title %}{{ post.name }}{% endblock %}
+{% block title %}{{ post.name }} - AnimEpic{% endblock %}
+{% block style %}
+<style>
+        body {
+         background: url({% static 'main/images/back2.jpg' %}) no-repeat center center fixed;
+         -webkit-background-size: 100% 100%;
+         -moz-background-size: 100% 100%;
+         -o-background-size: 100% 100%;
+         background-size:  100% 100%
+    }
+
+
+</style>
+{% endblock %}
 {% block content %}
-<div class="bg-success-subtle">
-    <div class="container mx-5 bg-subtle">
-        <div class="row text-md-center">
-            <h1 class="display-3">{{post.name}}</h1>
-        </div>
-        <div class="row">
-            <div class="col-6 text-md-end">
-                {% if post.photo %}
-                <p><img class="img-article-left" src="{{post.photo.url}}"></p>
-                {% endif %}
-            </div>
-            <div class="col-6">
-                <p class="lead">
-                    {{post.content}}
-                </p>
-            </div>
-        </div>
+<div class="row text-md-center">
+    <h1 class="display-4 mt-3" style="color: #bab6b6;"><strong>{{post.name}}</strong></h1>
+    {% if post.anime %}
+    <h5 class="mb-2" style="color: #bab6b6;"><strong>Anime: {{post.anime}}</strong></h5>
+    {% endif %}
+</div>
+<div class="row m-4">
+    <div class="col-lg-4 col-md-6 col-12">
+        {% if post.photo %}
+        <p><img class="img-article-left rounded" src="{{post.photo.url}}" style="max-width: 350px;"></p>
+        {% endif %}
+    </div>
+    <div class="col-lg-8 col-md-6 col-12 bg-dark rounded" style="--bs-bg-opacity: .8;">
+        <p style="color: #8b8a94">
+            {{post.content}}
+        </p>
     </div>
 </div>
+
 
 {% endblock %}
