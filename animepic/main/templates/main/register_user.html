@@ -5,10 +5,32 @@
 {% block title %}Sign up - AnimEpic{% endblock %}
 
 {% block content %}
-<h4>Join the AnimEpic squad and add your favourite characters into our community!</h4>
-<form method="post">
-  {% csrf_token %}
-  {% bootstrap_form form layout='horizontal' %}
-  {% buttons submit='Sign up' %}{% endbuttons %}
-</form>
+
+<div class="container bg-dark rounded" style="opacity: 0.85;">
+    <div class="row my-3 pt-3 md text-light text-center">
+        <h4>Join the AnimEpic squad and add your favourite characters into our community!</h4>
+    </div>
+    <div class="row my-3 pb-4 md d-flex justify-content-center text-light">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+            <div class="row py-0">
+                <div class="form-group py-2 ps-3 col-md col-12">
+                    <div class="form-group">
+                        {% bootstrap_field field layout="horizontal" %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="my-2 text-center">
+                <button type="submit" class="btn btn-secondary text-dark">Sign Up</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 {% endblock %}

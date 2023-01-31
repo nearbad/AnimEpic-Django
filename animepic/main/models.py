@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
+from django.utils.text import slugify
 
 class Character(models.Model):
     name = models.CharField(max_length=255, db_index=True, verbose_name='Name of the character')
@@ -19,10 +19,15 @@ class Character(models.Model):
     def get_absolute_url(self):
         return reverse('post', kwargs={'post_slug': self.slug})
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Character, self).save(*args, **kwargs)
+
     class Meta:
         verbose_name = 'Anime Character'
         verbose_name_plural = 'Anime Characters'
         ordering = ['-time_create', 'name']
+
 
 
 class Category(models.Model):
@@ -34,6 +39,10 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse('category', kwargs={'cat_slug': self.slug})
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Category, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Category'

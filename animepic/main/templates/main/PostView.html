@@ -18,7 +18,7 @@
 </style>
 {% endblock %}
 {% block content %}
-<div class="row text-md-center">
+<div class="row ms-3 text-md-center">
     <h1 class="display-4 mt-3" style="color: #bab6b6;"><strong>{{post.name}}</strong></h1>
     {% if post.anime %}
     <h5 class="mb-2" style="color: #bab6b6;"><strong>Anime: {{post.anime}}</strong></h5>
@@ -30,7 +30,7 @@
         <p><img class="img-article-left rounded" src="{{post.photo.url}}" style="max-width: 350px;"></p>
         {% endif %}
     </div>
-    <div class="col-lg-8 col-md-6 col-12 bg-dark rounded" style="--bs-bg-opacity: .8;">
+    <div class="col-lg-8 col-md-6 col-12 py-2 bg-dark rounded" style="--bs-bg-opacity: .8;">
         <p style="color: #8b8a94">
             {{post.content}}
         </p>

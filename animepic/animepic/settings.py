@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-!#l6!$^g(@=eyj-9i&9hc7((n_3$xubkan402%w1(r4a(y3j&1
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+# CSRF_TRUSTED_ORIGINS = []
 
 # Application definition
 
@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    # 'debug_toolbar',
     'bootstrap4',
     'captcha',
     'main.apps.MainConfig',
@@ -39,6 +41,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'animepic.urls'
@@ -117,3 +120,15 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
