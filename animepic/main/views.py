@@ -95,8 +95,8 @@ class RegisterUser(CreateView):
 class LoginUser(LoginView):
     template_name = 'main/login_user.html'
 
-    # def get_success_url(self):
-    #     return reverse_lazy('main:MainView')
+    def get_success_url(self):
+        return reverse_lazy('main:MainView')
 
 
 def logout_user(request):
