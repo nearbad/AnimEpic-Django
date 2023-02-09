@@ -7,7 +7,7 @@ To set this up, go into your virtual environment if needed, and then check this 
 
 cd ...wherever...
 
-git clone https://github.com/nearbad/AnimEpic.git
+git clone https://github.com/nearbad/AnimEpic-Django.git
 
 cd AnimEpic
 
