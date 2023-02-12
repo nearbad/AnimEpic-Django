@@ -26,7 +26,7 @@ class Character(models.Model):
     class Meta:
         verbose_name = 'Anime Character'
         verbose_name_plural = 'Anime Characters'
-        ordering = ['-time_create', 'name']
+        ordering = ['name']
 
 
 
