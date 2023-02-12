@@ -1,6 +1,7 @@
 # AnimEpic-Django
-# You can check the website in this adress http://nearbad.pythonanywhere.com/
+You can check the website in this adress http://nearbad.pythonanywhere.com/
 This is a simple django application that allows you authenticate, add content, read content.
+
 
 Web-site about anime characters and their bio.
 
