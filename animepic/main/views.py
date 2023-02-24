@@ -50,7 +50,7 @@ class AddPost(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = AddPostForm
     template_name = 'main/AddPost.html'
     success_url = reverse_lazy('main:MainView')
-    success_message = "%(name)s - post has been successfully sent to the administrators for the review.s " \
+    success_message = "%(name)s - post has been successfully sent to the administrators for the review." \
                       "It will appear in the list soon!"
 
 
